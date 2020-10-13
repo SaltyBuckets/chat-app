@@ -4,6 +4,7 @@ $(function () {
     var socket = io();
     $('#send').click(function (e) {
         const message = $('#write-msg').val();
+        if(message=='')return false;
         let msg = {
             message: message,
         };
@@ -13,7 +14,6 @@ $(function () {
     });
 
     socket.on('init', (data) => {
-        console.log(data);
         data.forEach((msg) => {
             addMessage(msg);
         });
@@ -21,7 +21,6 @@ $(function () {
 
     socket.on('chatMessage', function (msg) {
         addMessage(msg);
-        console.log(msg);
     });
 });
 
