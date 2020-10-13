@@ -1,0 +1,79 @@
+body{
+    margin: 0px;
+    background-color: black;
+    font-family: 'Itim', cursive;
+    padding-bottom: 0px;
+}
+
+.user-field{
+    position: fixed;
+    width: 50%;
+    bottom: 10px;
+    width: 100%;
+    height: 7%;
+    padding: 5px;
+    background-color: rgb(207, 209, 208);
+    margin: 0px;
+    display: inline-block;
+}
+
+#write-msg{
+    position: relative;
+    height: 90%;
+    width: 80%;
+    border-radius: 50px;
+    padding-left: 10px;
+    outline: none;
+    font-family: 'Itim', cursive;
+    font-size: large;
+    overflow: scroll;
+}
+
+#send{
+    height: 45px;
+    width: 50px;
+    background-color: transparent; 
+    outline: none;
+    border: none;
+    font-size: x-large;
+    /* margin-top: 7px; */
+    position: relative;
+    right: 2px;
+    top: 5px;
+}
+
+#msg{
+    background-color: rgb(71, 71, 73);
+    width: fit-content;
+    height: fit-content;
+    padding: 15px;
+    border-radius: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: whitesmoke;
+    align-self: center;
+}
+
+#messages{
+    background-color: rgb(207, 209, 208);
+    overflow: scroll;
+    height: 92%;
+    align-items: center;
+    scroll-behavior: smooth;
+}
+
+#time{
+    color: rgb(149, 149, 149);
+    position: relative;
+    font-size: xx-small;   
+    bottom: 0px; 
+    display: inline;
+}
+ #time:before {
+    content: "\a ";
+    white-space: pre;
+  }
+
+
