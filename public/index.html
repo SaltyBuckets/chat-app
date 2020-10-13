@@ -52,17 +52,28 @@
     crossorigin="anonymous"
   ></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
   <script>
+    let user = {};
+    user.name = prompt('Enter name');
     $(function () {
       var socket = io();
       $('form').submit(function (e) {
         e.preventDefault();
-        socket.emit('chatMessage', $('#m').val());
+        const message = $('#m').val();
+        let msg = {
+          message: message,
+          name: user.name,
+        };
+        socket.emit('chatMessage', msg);
         $('#m').val('');
         return false;
       });
 
+      socket.emit('auth', user);
+
       socket.on('init', (data) => {
+        console.log(data);
         data.forEach((msg) => {
           addMessage(msg);
         });
@@ -70,13 +81,17 @@
 
       socket.on('chatMessage', function (msg) {
         addMessage(msg);
+        console.log(msg);
       });
     });
 
     function addMessage(msg) {
       let messageContainer = $('<h3>').text(msg.message);
+      let nameContainer = $('<h1>').text(msg.name);
       let dateContainer = $('<small>').text(msg.date);
-      $('#messages').append($('<li>').append(messageContainer, dateContainer));
+      $('#messages').append(
+        $('<li>').append(nameContainer, messageContainer, dateContainer)
+      );
     }
   </script>
 
