@@ -1,107 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cd51d46bae.js" crossorigin="anonymous"></script>
+</head>
 
-      form {
-        background: #000;
-        padding: 3px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-      }
-
-      form input {
-        border: 0;
-        padding: 10px;
-        width: 90%;
-        margin-right: 0.5%;
-      }
-
-      form button {
-        width: 9%;
-        background: rgba(237, 34, 93, 50);
-        border: none;
-        padding: 10px;
-      }
-
-      #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      #messages li {
-        padding: 5px 10px;
-      }
-
-      #messages li:nth-child(odd) {
-        background: #eee;
-      }
-    </style>
-  </head>
-  <script
+<script
     src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"
     integrity="sha512-AcZyhRP/tbAEsXCCGlziPun5iFvcSUpEz2jKkx0blkYKbxU81F+iq8FURwPn1sYFeksJ+sDDrI5XujsqSobWdQ=="
     crossorigin="anonymous"
   ></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-  <script>
-    let user = {};
-    user.name = prompt('Enter name');
-    $(function () {
-      var socket = io();
-      $('form').submit(function (e) {
-        e.preventDefault();
-        const message = $('#m').val();
-        let msg = {
-          message: message,
-          name: user.name,
-        };
-        socket.emit('chatMessage', msg);
-        $('#m').val('');
-        return false;
-      });
+<body>
+    <div style="height: 100vh;">
 
-      socket.emit('auth', user);
+        <div id="messages">
+            <ul style="list-style-type:none;">
+                <!-- update msg here -->
+            </ul>
+        </div>
 
-      socket.on('init', (data) => {
-        console.log(data);
-        data.forEach((msg) => {
-          addMessage(msg);
-        });
-      });
+        <div class="user-field">
+            <input id="write-msg" type="text" placeholder="Type your message here....">
+            <button  id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
 
-      socket.on('chatMessage', function (msg) {
-        addMessage(msg);
-        console.log(msg);
-      });
-    });
+    </div>
+    <script src="./script.js"></script>
+</body>
 
-    function addMessage(msg) {
-      let messageContainer = $('<h3>').text(msg.message);
-      let nameContainer = $('<h1>').text(msg.name);
-      let dateContainer = $('<small>').text(msg.date);
-      $('#messages').append(
-        $('<li>').append(nameContainer, messageContainer, dateContainer)
-      );
-    }
-  </script>
-
-  <body>
-    <h1>Simple Chat App</h1>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" placeholder="Type a message.." /><button>
-        Send
-      </button>
-    </form>
-  </body>
 </html>
